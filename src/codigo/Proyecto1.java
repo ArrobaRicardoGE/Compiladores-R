@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package proyecto1;
+package codigo;
 
 import java.io.File; 
 
@@ -16,7 +16,7 @@ public class Proyecto1 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        String ruta = "D:/ricar/Documents/UP/8/Compiladores/1/Proyecto1/src/proyecto1/Lexer.flex";
+        String ruta = "D:/ricar/Documents/UP/8/Compiladores/Compiladores-R/src/codigo/Lexer.flex"; // Modificar con su ruta
         generarLexer(ruta);
     }
     public static void generarLexer(String ruta){
