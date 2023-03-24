@@ -1,0 +1,36 @@
+package codigo;
+
+import java_cup.runtime.Symbol;
+
+parser code
+{:
+    private Symbol s;
+    
+
+    public void syntax_error(Symbol s){
+        this.s = s;
+    }
+
+    public Symbol getS(){
+        return this.s;
+    }
+:};
+
+terminal Function, Main, Parentesis_a, Parentesis_c, Llave_a, Llave_c, Integer,
+Identificador, P_coma, Igual, Numero;
+
+non terminal INICIO, SENTENCIA, DECLARACION;
+
+start with INICIO;
+
+INICIO ::= 
+    Function Main Parentesis_a Parentesis_c Llave_a SENTENCIA Llave_c
+;
+SENTENCIA ::= 
+    SENTENCIA DECLARACION |
+    DECLARACION
+;
+DECLARACION ::= 
+    Integer Identificador P_coma | 
+    Integer Identificador Igual Numero P_coma
+;
