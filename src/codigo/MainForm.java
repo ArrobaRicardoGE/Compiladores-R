@@ -110,7 +110,7 @@ public class MainForm extends javax.swing.JFrame {
                         resultado += lexer.lexeme + ": Es un " + tokens + "\n";
                         break;
                     default:
-                        resultado += "Token: " + tokens + "\n";
+                        resultado += "Token: " + tokens + "(" + lexer.lexeme + ")\n";
                         break;
                 }
             }

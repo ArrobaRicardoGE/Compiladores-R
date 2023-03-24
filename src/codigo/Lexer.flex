@@ -20,9 +20,9 @@ espacio=[ ,\t,\r]+
 /* Salto de linea */
 ( "\n" ) {return Linea;}
 
-/* Comillas */
-( "\"" ) {lexeme=yytext(); return Comillas;}
-( "'" ) {lexeme=yytext(); return Comillas;}
+/* Cadena */
+( '.*' ) {lexeme=yytext(); return Cadena;}
+( \".*\" ) {lexeme=yytext(); return Cadena;}
 
 /* Tipos de datos */
 ( logical | integer | double | complex | character | raw ) {lexeme=yytext(); return T_dato;}
@@ -56,10 +56,10 @@ espacio=[ ,\t,\r]+
 ( while ) {lexeme=yytext(); return While;}
  
  /* Palabra reservada TRUE */
-( TRUE ) {lexeme=yytext(); return TRUE;}
+( TRUE ) {lexeme=yytext(); return True;}
  
  /* Palabra reservada FALSE */
-( FALSE ) {lexeme=yytext(); return FALSE;}
+( FALSE ) {lexeme=yytext(); return False;}
  
  /* Palabra reservada NA */
 ( NA ) {lexeme=yytext(); return NA;}
