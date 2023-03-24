@@ -10,7 +10,12 @@ package codigo;
  */
 public enum Tokens {
     Reservadas,
-    T_dato,
+    Logical,
+    Integer,
+    Double,
+    Complex,
+    Character,
+    Raw,
     Op_Logico,
     Break,
     Modulo,
@@ -49,5 +54,6 @@ public enum Tokens {
     Identificador,
     Numero,
     NumeroReal,
+    Main,
     ERROR
 }

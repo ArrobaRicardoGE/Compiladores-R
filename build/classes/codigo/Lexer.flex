@@ -18,15 +18,22 @@ espacio=[ ,\t,\r]+
 ( "#"(.)* ) {/*Ignore*/}
 
 /* Salto de linea */
-( "\n" ) {return Linea;}
+( "\n" ) {lexeme=yytext(); return Linea;}
 
 /* Cadena */
 ( '.*' ) {lexeme=yytext(); return Cadena;}
 ( \".*\" ) {lexeme=yytext(); return Cadena;}
 
 /* Tipos de datos */
-( logical | integer | double | complex | character | raw ) {lexeme=yytext(); return T_dato;}
+( logical ) {lexeme=yytext(); return Logical;}
+( integer ) {lexeme=yytext(); return Integer;}
+( double ) {lexeme=yytext(); return Double;}
+( complex ) {lexeme=yytext(); return Complex;}
+( character ) {lexeme=yytext(); return Character;}
+( raw ) {lexeme=yytext(); return Raw;}
 
+/* Main */
+( main ) {lexeme=yytext(); return Main;} 
 
 /* Palabra reservada Break */
 ( break ) {lexeme=yytext(); return Break;}
