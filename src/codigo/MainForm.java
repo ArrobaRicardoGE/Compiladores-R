@@ -169,6 +169,7 @@ public class MainForm extends javax.swing.JFrame {
         });
 
         txtArchivo.setColumns(20);
+        txtArchivo.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         txtArchivo.setRows(5);
         jscrollpanel1.setViewportView(txtArchivo);
 
