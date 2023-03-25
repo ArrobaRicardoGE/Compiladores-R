@@ -17,20 +17,52 @@ parser code
 :};
 
 terminal Function, Main, Parentesis_a, Parentesis_c, Llave_a, Llave_c, Integer,
-Identificador, P_coma, Igual, Numero;
+Identificador, P_coma, Igual, Numero, Double, Logical, Character, Cadena, True,
+False, Multiplicacion, Division, Suma, Resta, NumeroReal;
 
-non terminal INICIO, SENTENCIA, DECLARACION;
+non terminal INICIO, SENTENCIA, DECLARACION, FACTOR, TERMINO, EXPRESION,
+SENTENCIA_BOOLEANA;
 
 start with INICIO;
 
 INICIO ::= 
     Function Main Parentesis_a Parentesis_c Llave_a SENTENCIA Llave_c
 ;
+
 SENTENCIA ::= 
     SENTENCIA DECLARACION |
     DECLARACION
 ;
+
+SENTENCIA_BOOLEANA ::= 
+    True | False
+;
+
 DECLARACION ::= 
     Integer Identificador P_coma | 
-    Integer Identificador Igual Numero P_coma
+    Double  Identificador P_coma |
+    Logical Identificador P_coma |
+    Character Identificador P_coma |
+    Integer Identificador Igual EXPRESION P_coma |
+    Double Identificador Igual EXPRESION P_coma |
+    Character Identificador Igual Cadena P_coma |
+    Character Identificador Igual Identificador P_coma |
+    Logical Identificador Igual SENTENCIA_BOOLEANA P_coma
+;
+
+FACTOR ::= 
+    Identificador | Numero | NumeroReal | 
+    Parentesis_a EXPRESION Parentesis_c
+;
+
+TERMINO ::= 
+    FACTOR |
+    TERMINO Multiplicacion FACTOR |
+    TERMINO Division FACTOR
+;
+
+EXPRESION ::=
+    TERMINO |
+    EXPRESION Suma TERMINO |
+    EXPRESION Resta TERMINO
 ;
