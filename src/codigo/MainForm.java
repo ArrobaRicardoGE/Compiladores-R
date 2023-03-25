@@ -4,8 +4,10 @@
  */
 package codigo;
 
+import java.awt.Color;
 import java.io.*; 
 import java.util.logging.*; 
+import java_cup.runtime.Symbol;
 import javax.swing.JFileChooser;
 
 /**
@@ -20,7 +22,104 @@ public class MainForm extends javax.swing.JFrame {
     public MainForm() {
         initComponents();
     }
-
+    private void analizarLexico() throws IOException{
+        int cont = 1;
+        
+        String expr = (String) txtArchivo.getText(); //en expr carga la info del text area
+        Lexer lexer = new Lexer(new StringReader(expr)); //genera objeto lexer (lexeman)
+        String resultado = "LINEA " + cont + "\t\tSIMBOLO\n";
+        while (true) {
+            Tokens token = lexer.yylex(); //categoriza el lexema
+            if (token == null) {
+                txtAnalizarLex.setText(resultado);
+                return;
+            }
+            switch (token) { // Muestra la información léxica
+                case Linea:
+                    cont++;
+                    resultado += "LINEA " + cont + "\n";
+                    break;
+                case Cadena:
+                    resultado += "  <Tipo de dato>\t" + lexer.lexeme + "\n";
+                    break;
+                case If:
+                    resultado += "  <Reservada if>\t" + lexer.lexeme + "\n";
+                    break;
+                case While:
+                    resultado += "  <Reservada while>\t" + lexer.lexeme + "\n";
+                    break;
+                case For:
+                    resultado += "  <Reservada while>\t" + lexer.lexeme + "\n";
+                    break;
+                case Igual:
+                    resultado += "  <Operador igual>\t" + lexer.lexeme + "\n";
+                    break;
+                case Suma:
+                    resultado += "  <Operador suma>\t" + lexer.lexeme + "\n";
+                    break;
+                case Resta:
+                    resultado += "  <Operador resta>\t" + lexer.lexeme + "\n";
+                    break;
+                case Multiplicacion:
+                    resultado += "  <Operador multiplicacion>\t" + lexer.lexeme + "\n";
+                    break;
+                case Division:
+                    resultado += "  <Operador division>\t" + lexer.lexeme + "\n";
+                    break;
+                case Op_logico:
+                    resultado += "  <Operador logico>\t" + lexer.lexeme + "\n";
+                    break;
+                case Op_incremento:
+                    resultado += "  <Operador incremento>\t" + lexer.lexeme + "\n";
+                    break;
+                case Op_relacional:
+                    resultado += "  <Operador relacional>\t" + lexer.lexeme + "\n";
+                    break;
+                case Op_atribucion:
+                    resultado += "  <Operador atribucion>\t" + lexer.lexeme + "\n";
+                    break;
+                case Op_booleano:
+                    resultado += "  <Operador booleano>\t" + lexer.lexeme + "\n";
+                    break;
+                case Parentesis_a:
+                    resultado += "  <Parentesis de apertura>\t" + lexer.lexeme + "\n";
+                    break;
+                case Parentesis_c:
+                    resultado += "  <Parentesis de cierre>\t" + lexer.lexeme + "\n";
+                    break;
+                case Llave_a:
+                    resultado += "  <Llave de apertura>\t" + lexer.lexeme + "\n";
+                    break;
+                case Llave_c:
+                    resultado += "  <Llave de cierre>\t" + lexer.lexeme + "\n";
+                    break;
+                case Corchete_a:
+                    resultado += "  <Corchete de apertura>\t" + lexer.lexeme + "\n";
+                    break;
+                case Corchete_c:
+                    resultado += "  <Corchete de cierre>\t" + lexer.lexeme + "\n";
+                    break;
+                case Main:
+                    resultado += "  <Reservada main>\t" + lexer.lexeme + "\n";
+                    break;
+                case P_coma:
+                    resultado += "  <Punto y coma>\t" + lexer.lexeme + "\n";
+                    break;
+                case Identificador:
+                    resultado += "  <Identificador>\t\t" + lexer.lexeme + "\n";
+                    break;
+                case Numero:
+                    resultado += "  <Numero>\t\t" + lexer.lexeme + "\n";
+                    break;
+                case ERROR:
+                    resultado += "  <Simbolo no definido>\n";
+                    break;
+                default:
+                    resultado += "  < " + lexer.lexeme + " >\n";
+                    break;
+            }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,8 +133,8 @@ public class MainForm extends javax.swing.JFrame {
         btnArchivo = new javax.swing.JButton();
         btnAnalizarLex = new javax.swing.JButton();
         btnLimpiarLex = new javax.swing.JButton();
-        txtArchivo = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jscrollpanel1 = new javax.swing.JScrollPane();
+        txtArchivo = new javax.swing.JTextArea();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAnalizarLex = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
@@ -56,12 +155,22 @@ public class MainForm extends javax.swing.JFrame {
         });
 
         btnAnalizarLex.setText("Analizar");
+        btnAnalizarLex.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnalizarLexActionPerformed(evt);
+            }
+        });
 
         btnLimpiarLex.setText("Limpiar");
+        btnLimpiarLex.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarLexActionPerformed(evt);
+            }
+        });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        txtArchivo.setViewportView(jTextArea1);
+        txtArchivo.setColumns(20);
+        txtArchivo.setRows(5);
+        jscrollpanel1.setViewportView(txtArchivo);
 
         txtAnalizarLex.setColumns(20);
         txtAnalizarLex.setRows(5);
@@ -75,7 +184,7 @@ public class MainForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jscrollpanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -96,7 +205,7 @@ public class MainForm extends javax.swing.JFrame {
                     .addComponent(btnLimpiarLex))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtArchivo, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                    .addComponent(jscrollpanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
                 .addContainerGap())
         );
@@ -104,8 +213,18 @@ public class MainForm extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Analizador Sintáctico", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         btnAnalizarSin.setText("Analizar");
+        btnAnalizarSin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnalizarSinActionPerformed(evt);
+            }
+        });
 
         btnLimpiarSin.setText("Limpiar");
+        btnLimpiarSin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarSinActionPerformed(evt);
+            }
+        });
 
         txtAnalizarSin.setColumns(20);
         txtAnalizarSin.setRows(5);
@@ -161,40 +280,55 @@ public class MainForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArchivoActionPerformed
-        // TODO add your handling code here:
+        try {    
+            JFileChooser chooser = new JFileChooser();
+            chooser.showOpenDialog(null);
+            BufferedReader lector = new BufferedReader(new FileReader(chooser.getSelectedFile().getPath()));
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while((line = lector.readLine()) != null) {
+                sb.append(line);
+                sb.append("\n");
+            }
+            String fileContents = sb.toString(); 
+            txtArchivo.setText(fileContents);
+        }
+        catch (IOException ex) {
+             Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnArchivoActionPerformed
 
-    private void analizeFile(String filename) {
+    private void btnAnalizarLexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalizarLexActionPerformed
         try {
-            Reader lector = new BufferedReader(new FileReader(filename));
-            Lexer lexer = new Lexer(lector);
-            String resultado = "";
-            while (true) {
-                Tokens tokens = lexer.yylex();
-                if (tokens == null) {
-                    resultado += "FIN";
-                    txtResultado.setText(resultado);
-                    return;
-                }
-                switch (tokens) {
-                    case ERROR:
-                        resultado += "Simbolo no definido\n";
-                        break;
-                    case Identificador: case Numero: case NumeroReal: case Reservadas:
-                        resultado += lexer.lexeme + ": Es un " + tokens + "\n";
-                        break;
-                    default:
-                        resultado += "Token: " + tokens + "(" + lexer.lexeme + ")\n";
-                        break;
-                }
-            }
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+            analizarLexico();
         } catch (IOException ex) {
             Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    
+    }//GEN-LAST:event_btnAnalizarLexActionPerformed
+
+    private void btnAnalizarSinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalizarSinActionPerformed
+        String ST = txtArchivo.getText(); //carga el texto al string 
+        Sintax s = new Sintax(new codigo.LexerCup(new StringReader(ST))); //genera un objeto símbolo 
+
+        try {
+            s.parse(); //realiza el análisis
+            txtAnalizarSin.setText("Analisis realizado correctamente");
+            txtAnalizarSin.setForeground(new Color(25, 111, 61)); //color diferente al que usa Java
+        } catch (Exception ex) {
+            Symbol sym = s.getS(); //del SintaxCup
+            txtAnalizarSin.setText("Error de sintaxis. Linea: " + (sym.right + 1) + " Columna: " + (sym.left + 1) + ", Texto: \"" + sym.value + "\"");
+            txtAnalizarSin.setForeground(Color.red);
+        }
+    }//GEN-LAST:event_btnAnalizarSinActionPerformed
+
+    private void btnLimpiarLexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarLexActionPerformed
+        txtAnalizarLex.setText(null);
+    }//GEN-LAST:event_btnLimpiarLexActionPerformed
+
+    private void btnLimpiarSinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarSinActionPerformed
+        txtAnalizarSin.setText(null);
+    }//GEN-LAST:event_btnLimpiarSinActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -240,9 +374,9 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JScrollPane jscrollpanel1;
     private javax.swing.JTextArea txtAnalizarLex;
     private javax.swing.JTextArea txtAnalizarSin;
-    private javax.swing.JScrollPane txtArchivo;
+    private javax.swing.JTextArea txtArchivo;
     // End of variables declaration//GEN-END:variables
 }
