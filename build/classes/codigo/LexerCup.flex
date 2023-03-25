@@ -53,6 +53,9 @@ espacio=[ ,\t,\r,\n]+
 /* Palabra reservada If */
 ( if ) {return new Symbol(sym.If, yychar, yyline, yytext());}
 
+/* Palabra reservada Else */
+( else ) {return new Symbol(sym.If, yychar, yyline, yytext());}
+
 /* Palabra reservada In */
 ( in ) {return new Symbol(sym.In, yychar, yyline, yytext());}
 

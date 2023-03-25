@@ -55,5 +55,6 @@ public enum Tokens {
     Numero,
     NumeroReal,
     Main,
+    Else,
     ERROR
 }

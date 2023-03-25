@@ -47,6 +47,9 @@ espacio=[ ,\t,\r]+
 /* Palabra reservada If */
 ( if ) {lexeme=yytext(); return If;}
 
+/* Palabra reservada Else */
+( else ) {lexeme=yytext(); return Else;}
+
 /* Palabra reservada In */
 ( in ) {lexeme=yytext(); return In;}
 
