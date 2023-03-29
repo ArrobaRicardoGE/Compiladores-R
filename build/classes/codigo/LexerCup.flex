@@ -134,6 +134,8 @@ espacio=[ ,\t,\r,\n]+
 /* Punto y coma */
 ( ";" ) {return new Symbol(sym.P_coma, yychar, yyline, yytext());}
 
+/* Punto y coma */
+( ":" ) {return new Symbol(sym.Dos_puntos, yychar, yyline, yytext());}
 
 /* Identificador */
 [a-zA-Z][a-zA-Z_0-9\.]* {return new Symbol(sym.Identificador, yychar, yyline, yytext());}

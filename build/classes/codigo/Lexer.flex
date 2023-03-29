@@ -128,6 +128,9 @@ espacio=[ ,\t,\r]+
 /* Punto y coma */
 ( ";" ) {lexeme=yytext(); return P_coma;}
 
+/* Dos puntos */
+(":") {lexeme=yytext(); return Dos_puntos;}
+
 
 /* Identificador */
 [a-zA-Z][a-zA-Z_0-9\.]* {lexeme=yytext(); return Identificador;}

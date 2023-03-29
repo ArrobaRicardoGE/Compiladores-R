@@ -20,6 +20,7 @@ public enum Tokens {
     Break,
     Modulo,
     P_coma,
+    Dos_puntos,
     Llave_a,
     Return,
     Linea,
