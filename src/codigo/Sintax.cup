@@ -18,10 +18,11 @@ parser code
 
 terminal Function, Main, Parentesis_a, Parentesis_c, Llave_a, Llave_c, Integer,
 Identificador, P_coma, Igual, Numero, Double, Logical, Character, Cadena, True,
-False, Multiplicacion, Division, Suma, Resta, NumeroReal;
+False, Multiplicacion, Division, Suma, Resta, NumeroReal, Op_logico, Op_relacional,
+If, Else, Break, Next;
 
 non terminal INICIO, SENTENCIA, DECLARACION, FACTOR, TERMINO, EXPRESION,
-SENTENCIA_BOOLEANA;
+SENTENCIA_BOOLEANA, IF, IF_ELSE;
 
 start with INICIO;
 
@@ -31,11 +32,19 @@ INICIO ::=
 
 SENTENCIA ::= 
     SENTENCIA DECLARACION |
-    DECLARACION
+    DECLARACION |
+    SENTENCIA IF |
+    IF |
+    SENTENCIA IF_ELSE |
+    IF_ELSE
 ;
 
 SENTENCIA_BOOLEANA ::= 
-    True | False
+    True | 
+    False |
+    SENTENCIA_BOOLEANA Op_logico EXPRESION |
+    EXPRESION Op_relacional EXPRESION  |
+    Cadena Op_relacional Cadena
 ;
 
 DECLARACION ::= 
@@ -65,4 +74,20 @@ EXPRESION ::=
     TERMINO |
     EXPRESION Suma TERMINO |
     EXPRESION Resta TERMINO
+;
+
+IF ::=
+    If Parentesis_a SENTENCIA_BOOLEANA Parentesis_c Llave_a SENTENCIA Llave_c   |
+    If Parentesis_a SENTENCIA_BOOLEANA Parentesis_c Llave_a Break Llave_c   |
+    If Parentesis_a SENTENCIA_BOOLEANA Parentesis_c Llave_a Next Llave_c |
+    If Parentesis_a SENTENCIA_BOOLEANA Parentesis_c Llave_a SENTENCIA Break Llave_c   |
+    If Parentesis_a SENTENCIA_BOOLEANA Parentesis_c Llave_a SENTENCIA Next Llave_c 
+;
+
+IF_ELSE ::= 
+    IF Else Llave_a SENTENCIA Llave_c    |
+    IF Else Llave_a Break Llave_c    |
+    IF Else Llave_a Next Llave_c |
+    IF Else Llave_a SENTENCIA Break P_coma Llave_c    |
+    IF Else Llave_a SENTENCIA Next P_coma Llave_c
 ;
