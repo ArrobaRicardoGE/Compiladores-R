@@ -51,6 +51,9 @@ public class MainForm extends javax.swing.JFrame {
                 case For:
                     resultado += "  <Reservada for>\t" + lexer.lexeme + "\n";
                     break;
+                case Repeat:
+                    resultado += "  <Reservada repeat>\t" + lexer.lexeme + "\n";
+                    break;
                 case Igual:
                     resultado += "  <Operador igual>\t" + lexer.lexeme + "\n";
                     break;
@@ -68,9 +71,6 @@ public class MainForm extends javax.swing.JFrame {
                     break;
                 case Op_logico:
                     resultado += "  <Operador logico>\t" + lexer.lexeme + "\n";
-                    break;
-                case Op_incremento:
-                    resultado += "  <Operador incremento>\t" + lexer.lexeme + "\n";
                     break;
                 case Op_relacional:
                     resultado += "  <Operador relacional>\t" + lexer.lexeme + "\n";
@@ -110,6 +110,30 @@ public class MainForm extends javax.swing.JFrame {
                     break;
                 case Numero:
                     resultado += "  <Numero>\t\t" + lexer.lexeme + "\n";
+                    break;
+                case NumeroReal:
+                    resultado += "  <Numero Real>\t\t" + lexer.lexeme + "\n";
+                    break;
+                case Dos_puntos:
+                    resultado += "  <Dos Puntos>\t\t" + lexer.lexeme + "\n";
+                    break;
+                case True:
+                    resultado += "  <Valor booleano>\t\t" + lexer.lexeme + "\n";
+                    break;
+                case False:
+                    resultado += "  <Valor booleano>\t\t" + lexer.lexeme + "\n";
+                    break;
+                case Function:
+                    resultado += "  <Reservada function>\t\t" + lexer.lexeme + "\n";
+                    break;
+                case Break:
+                    resultado += "  <Reservada break>\t\t" + lexer.lexeme + "\n";
+                    break;
+                case Next:
+                    resultado += "  <Reservada next>\t\t" + lexer.lexeme + "\n";
+                    break;
+                case In:
+                    resultado += "  <Reservada in>\t\t" + lexer.lexeme + "\n";
                     break;
                 case ERROR:
                     resultado += "  <Simbolo no definido>\n";
