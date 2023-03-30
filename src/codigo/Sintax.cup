@@ -19,10 +19,10 @@ parser code
 terminal Function, Main, Parentesis_a, Parentesis_c, Llave_a, Llave_c, Integer,
 Identificador, P_coma, Igual, Numero, Double, Logical, Character, Cadena, True,
 False, Multiplicacion, Division, Suma, Resta, NumeroReal, Op_logico, Op_relacional,
-If, Else, Break, Next;
+If, Else, Break, Next, For, In, Dos_puntos, While, Repeat;
 
 non terminal INICIO, SENTENCIA, DECLARACION, FACTOR, TERMINO, EXPRESION,
-SENTENCIA_BOOLEANA, IF, IF_ELSE;
+SENTENCIA_BOOLEANA, IF, IF_ELSE, FOR, SENTENCIA_FOR, WHILE, REPEAT;
 
 start with INICIO;
 
@@ -36,7 +36,13 @@ SENTENCIA ::=
     SENTENCIA IF |
     IF |
     SENTENCIA IF_ELSE |
-    IF_ELSE
+    IF_ELSE | 
+    SENTENCIA FOR |
+    FOR | 
+    SENTENCIA WHILE | 
+    WHILE
+    SENTENCIA REPEAT | 
+    REPEAT
 ;
 
 SENTENCIA_BOOLEANA ::= 
@@ -90,4 +96,21 @@ IF_ELSE ::=
     IF Else Llave_a Next Llave_c |
     IF Else Llave_a SENTENCIA Break P_coma Llave_c    |
     IF Else Llave_a SENTENCIA Next P_coma Llave_c
+;
+
+FOR ::=
+    For Parentesis_a SENTENCIA_FOR Parentesis_c Llave_a SENTENCIA Llave_c
+;
+
+SENTENCIA_FOR ::=
+    Identificador In Identificador |
+    Identificador In EXPRESION Dos_puntos EXPRESION
+;
+
+WHILE ::=
+    While Parentesis_a SENTENCIA_BOOLEANA Parentesis_c Llave_a SENTENCIA Llave_c
+;
+
+REPEAT ::=
+    Repeat Llave_a SENTENCIA Llave_c
 ;

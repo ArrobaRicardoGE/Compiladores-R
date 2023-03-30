@@ -49,7 +49,7 @@ public class MainForm extends javax.swing.JFrame {
                     resultado += "  <Reservada while>\t" + lexer.lexeme + "\n";
                     break;
                 case For:
-                    resultado += "  <Reservada while>\t" + lexer.lexeme + "\n";
+                    resultado += "  <Reservada for>\t" + lexer.lexeme + "\n";
                     break;
                 case Igual:
                     resultado += "  <Operador igual>\t" + lexer.lexeme + "\n";
