@@ -39,8 +39,11 @@ public class MainForm extends javax.swing.JFrame {
                     cont++;
                     resultado += "LINEA " + cont + "\n";
                     break;
-                case Cadena:
+                case Character:
                     resultado += "  <Tipo de dato>\t" + lexer.lexeme + "\n";
+                    break;
+                case Cadena:
+                    resultado += "  <Cadena>\t\t" + lexer.lexeme + "\n";
                     break;
                 case If:
                     resultado += "  <Reservada if>\t" + lexer.lexeme + "\n";
