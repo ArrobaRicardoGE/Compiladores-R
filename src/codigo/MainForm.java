@@ -10,6 +10,7 @@ import java.util.logging.*;
 import java_cup.runtime.Symbol;
 import javax.swing.JFileChooser;
 import java.util.HashMap;
+import java.util.ArrayList;
 
 /**
  *
@@ -432,7 +433,17 @@ public class MainForm extends javax.swing.JFrame {
         txtAnalizarSin.setText(null);
     }//GEN-LAST:event_btnLimpiarSinActionPerformed
 
+    public class ExprToken {
+        public Tokens token;
+        public String value;
+        ExprToken(Tokens token, String value) {
+            this.token = token;
+            this.value = value;
+        }
+    }
+    
     private HashMap<String, Tokens> tablaIdentificadores;
+    private ArrayList<ArrayList<ExprToken>> tablaExpresiones; 
     
     private void generarIdentificadores() throws IOException, Exception {
         tablaIdentificadores = new HashMap<>(); 
@@ -461,7 +472,37 @@ public class MainForm extends javax.swing.JFrame {
         }
     }
     
+    private void generarExpresiones() throws IOException, Exception {
+        tablaExpresiones = new ArrayList<>();
+        String expr = (String) txtArchivo.getText(); //en expr carga la info del text area
+        Lexer lexer = new Lexer(new StringReader(expr)); //genera objeto lexer (lexeman)
+        int state = 0;
+        ArrayList<ExprToken> expression = new ArrayList<>();
+        //System.out.println("in");
+        while (true) {
+            Tokens token = lexer.yylex();
+            if (token == null) return;
+            if (token == Tokens.Linea) state = 1;
+            else if (state == 1 && !(token == Tokens.Character || 
+                    token == Tokens.Logical || token == Tokens.Integer || 
+                    token == Tokens.Double || token == Tokens.Identificador)) state = 0;
+            else if (state == 1) state = 2;
+            
+            if (state == 2){
+                //System.out.println(token);
+                expression.add(new ExprToken(token, lexer.lexeme));
+                if(token == Tokens.P_coma) {
+                    //System.out.println(expression);
+                    state = 0; 
+                    tablaExpresiones.add(new ArrayList<>(expression));
+                    expression.clear();
+                }
+            }
+        }
+    }
+    
     private void btnAnalizarSemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalizarSemActionPerformed
+        // Generar tabla de identificadores
         try {
             generarIdentificadores();
             String resultado = "";
@@ -469,6 +510,24 @@ public class MainForm extends javax.swing.JFrame {
                 resultado += name + "\t->\t" + tablaIdentificadores.get(name).toString() + "\n";
             }
             txtIdentificadores.setText(resultado);
+        }
+        catch(Exception ex){
+            txtAnalizarSem.setText(ex.getMessage());
+            txtAnalizarSem.setForeground(Color.red);
+            return; 
+        }
+        // Generar tabla de expresiones
+        try {
+            generarExpresiones();
+            String resultado = "";
+            for(ArrayList<ExprToken> expr: tablaExpresiones) {
+                String strExpr = "";
+                for(ExprToken t: expr) {
+                    strExpr += t.token + "(" + t.value + ") ";
+                }
+                resultado += strExpr + "\n";
+            }
+            txtExpresiones.setText(resultado);
         }
         catch(Exception ex){
             txtAnalizarSem.setText(ex.getMessage());
