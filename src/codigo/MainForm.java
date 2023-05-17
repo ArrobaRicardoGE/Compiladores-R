@@ -9,6 +9,7 @@ import java.io.*;
 import java.util.logging.*; 
 import java_cup.runtime.Symbol;
 import javax.swing.JFileChooser;
+import java.util.HashMap;
 
 /**
  *
@@ -169,6 +170,15 @@ public class MainForm extends javax.swing.JFrame {
         btnLimpiarSin = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtAnalizarSin = new javax.swing.JTextArea();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtExpresiones = new javax.swing.JTextArea();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        txtIdentificadores = new javax.swing.JTextArea();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        txtAnalizarSem = new javax.swing.JTextArea();
+        btnAnalizarSem = new javax.swing.JButton();
+        btnLimpiarSem = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -279,8 +289,71 @@ public class MainForm extends javax.swing.JFrame {
                     .addComponent(btnAnalizarSin)
                     .addComponent(btnLimpiarSin))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
                 .addContainerGap())
+        );
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Analizador Semántico", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+
+        txtExpresiones.setColumns(20);
+        txtExpresiones.setRows(5);
+        txtExpresiones.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tabla de Expresiones", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.ABOVE_TOP));
+        jScrollPane3.setViewportView(txtExpresiones);
+
+        txtIdentificadores.setColumns(20);
+        txtIdentificadores.setRows(5);
+        txtIdentificadores.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tabla de Identificadores", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.ABOVE_TOP));
+        jScrollPane4.setViewportView(txtIdentificadores);
+
+        txtAnalizarSem.setColumns(20);
+        txtAnalizarSem.setRows(5);
+        jScrollPane5.setViewportView(txtAnalizarSem);
+
+        btnAnalizarSem.setText("Analizar");
+        btnAnalizarSem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnalizarSemActionPerformed(evt);
+            }
+        });
+
+        btnLimpiarSem.setText("Limpiar");
+        btnLimpiarSem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarSemActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(btnAnalizarSem)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLimpiarSem))
+                    .addComponent(jScrollPane5)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jScrollPane4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAnalizarSem)
+                    .addComponent(btnLimpiarSem))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -291,7 +364,8 @@ public class MainForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -300,8 +374,9 @@ public class MainForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -357,6 +432,57 @@ public class MainForm extends javax.swing.JFrame {
         txtAnalizarSin.setText(null);
     }//GEN-LAST:event_btnLimpiarSinActionPerformed
 
+    private HashMap<String, Tokens> tablaIdentificadores;
+    
+    private void generarIdentificadores() throws IOException, Exception {
+        tablaIdentificadores = new HashMap<>(); 
+        int cont = 1;
+        String expr = (String) txtArchivo.getText(); //en expr carga la info del text area
+        Lexer lexer = new Lexer(new StringReader(expr)); //genera objeto lexer (lexeman)
+        while (true) {
+            Tokens token = lexer.yylex(); //categoriza el lexema
+            if (token == null) {
+                return;
+            }
+            if (token == Tokens.Linea) {
+                cont++;
+            }
+            else if (token == Tokens.Character || token == Tokens.Logical || 
+                    token == Tokens.Integer || token == Tokens.Double) {
+                lexer.yylex();
+                if(tablaIdentificadores.containsKey(lexer.lexeme)) {
+                    throw new Exception(
+                            String.format("Error en la linea %s. Declaración no permitida. La variable %s ya existe", 
+                                    cont, lexer.lexeme)
+                    );
+                }
+                tablaIdentificadores.put(lexer.lexeme, token); 
+            }
+        }
+    }
+    
+    private void btnAnalizarSemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalizarSemActionPerformed
+        try {
+            generarIdentificadores();
+            String resultado = "";
+            for(String name: tablaIdentificadores.keySet()) {
+                resultado += name + "\t->\t" + tablaIdentificadores.get(name).toString() + "\n";
+            }
+            txtIdentificadores.setText(resultado);
+        }
+        catch(Exception ex){
+            txtAnalizarSem.setText(ex.getMessage());
+            txtAnalizarSem.setForeground(Color.red);
+            return; 
+        }
+    }//GEN-LAST:event_btnAnalizarSemActionPerformed
+
+    private void btnLimpiarSemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarSemActionPerformed
+        txtAnalizarSem.setText(null);
+        txtIdentificadores.setText(null);
+        txtExpresiones.setText(null);
+    }//GEN-LAST:event_btnLimpiarSemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -394,17 +520,26 @@ public class MainForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnalizarLex;
+    private javax.swing.JButton btnAnalizarSem;
     private javax.swing.JButton btnAnalizarSin;
     private javax.swing.JButton btnArchivo;
     private javax.swing.JButton btnLimpiarLex;
+    private javax.swing.JButton btnLimpiarSem;
     private javax.swing.JButton btnLimpiarSin;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jscrollpanel1;
     private javax.swing.JTextArea txtAnalizarLex;
+    private javax.swing.JTextArea txtAnalizarSem;
     private javax.swing.JTextArea txtAnalizarSin;
     private javax.swing.JTextArea txtArchivo;
+    private javax.swing.JTextArea txtExpresiones;
+    private javax.swing.JTextArea txtIdentificadores;
     // End of variables declaration//GEN-END:variables
 }
