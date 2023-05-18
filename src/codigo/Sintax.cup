@@ -19,7 +19,7 @@ parser code
 terminal Function, Main, Parentesis_a, Parentesis_c, Llave_a, Llave_c, Integer,
 Identificador, P_coma, Igual, Numero, Double, Logical, Character, Cadena, True,
 False, Multiplicacion, Division, Suma, Resta, NumeroReal, Op_logico, Op_relacional,
-If, Else, Break, Next, For, In, Dos_puntos, While, Repeat, Op_atribucion;
+If, Else, Break, Next, For, In, Dos_puntos, While, Repeat, Op_atribucion, Potencia;
 
 non terminal INICIO, SENTENCIA, DECLARACION, FACTOR, TERMINO, EXPRESION,
 SENTENCIA_BOOLEANA, IF, IF_ELSE, FOR, SENTENCIA_FOR, WHILE, REPEAT, ASIGNACION_NUMERICA;
@@ -80,7 +80,8 @@ FACTOR ::=
 TERMINO ::= 
     FACTOR |
     TERMINO Multiplicacion FACTOR |
-    TERMINO Division FACTOR
+    TERMINO Division FACTOR |
+    TERMINO Potencia FACTOR
 ;
 
 EXPRESION ::=

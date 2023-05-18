@@ -74,6 +74,9 @@ public class MainForm extends javax.swing.JFrame {
                 case Division:
                     resultado += "  <Operador division>\t" + lexer.lexeme + "\n";
                     break;
+                case Potencia:
+                    resultado += "  <Operador potencia>\t" + lexer.lexeme + "\n";
+                    break;
                 case Op_logico:
                     resultado += "  <Operador logico>\t" + lexer.lexeme + "\n";
                     break;
