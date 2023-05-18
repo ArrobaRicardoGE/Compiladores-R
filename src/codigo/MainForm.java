@@ -629,6 +629,8 @@ public class MainForm extends javax.swing.JFrame {
             result += "-----------------------------------\n"; 
         }
         txtTercetos.setText(result);
+        txtAnalizarSem.setText("Analisis realizado correctamente");
+        txtAnalizarSem.setForeground(new Color(25, 111, 61)); //color diferente al que usa Java
     }//GEN-LAST:event_btnTercetosActionPerformed
 
     private void btnLimpiarTercetosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarTercetosActionPerformed
