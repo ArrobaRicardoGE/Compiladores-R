@@ -180,6 +180,11 @@ public class MainForm extends javax.swing.JFrame {
         txtAnalizarSem = new javax.swing.JTextArea();
         btnAnalizarSem = new javax.swing.JButton();
         btnLimpiarSem = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        txtTercetos = new javax.swing.JTextArea();
+        btnTercetos = new javax.swing.JButton();
+        btnLimpiarTercetos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -223,9 +228,9 @@ public class MainForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jscrollpanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jscrollpanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnArchivo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -357,6 +362,52 @@ public class MainForm extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ejecución de código", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+
+        txtTercetos.setColumns(20);
+        txtTercetos.setRows(5);
+        jScrollPane6.setViewportView(txtTercetos);
+
+        btnTercetos.setText("Ejecutar");
+        btnTercetos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTercetosActionPerformed(evt);
+            }
+        });
+
+        btnLimpiarTercetos.setText("Limpiar");
+        btnLimpiarTercetos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarTercetosActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane6)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(btnTercetos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLimpiarTercetos)))
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTercetos)
+                    .addComponent(btnLimpiarTercetos))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane6)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -365,8 +416,12 @@ public class MainForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -375,9 +430,14 @@ public class MainForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
 
         pack();
@@ -432,15 +492,6 @@ public class MainForm extends javax.swing.JFrame {
     private void btnLimpiarSinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarSinActionPerformed
         txtAnalizarSin.setText(null);
     }//GEN-LAST:event_btnLimpiarSinActionPerformed
-
-    public class ExprToken {
-        public Tokens token;
-        public String value;
-        ExprToken(Tokens token, String value) {
-            this.token = token;
-            this.value = value;
-        }
-    }
     
     private HashMap<String, Tokens> tablaIdentificadores;
     private ArrayList<ArrayList<ExprToken>> tablaExpresiones; 
@@ -462,8 +513,9 @@ public class MainForm extends javax.swing.JFrame {
                     token == Tokens.Integer || token == Tokens.Double) {
                 lexer.yylex();
                 if(tablaIdentificadores.containsKey(lexer.lexeme)) {
+                    // Regla 3
                     throw new Exception(
-                            String.format("Error en la linea %s. Declaración no permitida. La variable %s ya existe", 
+                            String.format("Error en la linea %s. Declaración no permitida. La variable <%s> ya existe", 
                                     cont, lexer.lexeme)
                     );
                 }
@@ -477,12 +529,16 @@ public class MainForm extends javax.swing.JFrame {
         String expr = (String) txtArchivo.getText(); //en expr carga la info del text area
         Lexer lexer = new Lexer(new StringReader(expr)); //genera objeto lexer (lexeman)
         int state = 0;
+        int cont = 0;
         ArrayList<ExprToken> expression = new ArrayList<>();
         //System.out.println("in");
         while (true) {
             Tokens token = lexer.yylex();
             if (token == null) return;
-            if (token == Tokens.Linea) state = 1;
+            if (token == Tokens.Linea) {
+                state = 1;
+                cont++;
+            }
             else if (state == 1 && !(token == Tokens.Character || 
                     token == Tokens.Logical || token == Tokens.Integer || 
                     token == Tokens.Double || token == Tokens.Identificador)) state = 0;
@@ -490,13 +546,13 @@ public class MainForm extends javax.swing.JFrame {
             
             if (state == 2){
                 //System.out.println(token);
-                expression.add(new ExprToken(token, lexer.lexeme));
                 if(token == Tokens.P_coma) {
                     //System.out.println(expression);
                     state = 0; 
                     tablaExpresiones.add(new ArrayList<>(expression));
                     expression.clear();
                 }
+                else expression.add(new ExprToken(token, lexer.lexeme, cont + 1));
             }
         }
     }
@@ -529,7 +585,7 @@ public class MainForm extends javax.swing.JFrame {
             }
             txtExpresiones.setText(resultado);
         }
-        catch(Exception ex){
+        catch(Exception ex){  
             txtAnalizarSem.setText(ex.getMessage());
             txtAnalizarSem.setForeground(Color.red);
             return; 
@@ -541,6 +597,33 @@ public class MainForm extends javax.swing.JFrame {
         txtIdentificadores.setText(null);
         txtExpresiones.setText(null);
     }//GEN-LAST:event_btnLimpiarSemActionPerformed
+
+    private void btnTercetosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTercetosActionPerformed
+        PrePost executer = new PrePost(tablaIdentificadores);
+        String result = "";
+        for(ArrayList<ExprToken> expr: tablaExpresiones) {
+            try {
+                executer.evaluate(expr);
+            }
+            catch(Exception ex){  
+                txtAnalizarSem.setText(ex.getMessage());
+                txtAnalizarSem.setForeground(Color.red);
+                return; 
+            }
+            for(ArrayList<ExprToken> terceto: executer.tercetos) {
+                for(ExprToken t: terceto) {
+                    result += t.value + " ";
+                }
+                result += "\n";
+            }
+            result += "-----------------------------------\n"; 
+        }
+        txtTercetos.setText(result);
+    }//GEN-LAST:event_btnTercetosActionPerformed
+
+    private void btnLimpiarTercetosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarTercetosActionPerformed
+        txtTercetos.setText(null);
+    }//GEN-LAST:event_btnLimpiarTercetosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -585,14 +668,18 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JButton btnLimpiarLex;
     private javax.swing.JButton btnLimpiarSem;
     private javax.swing.JButton btnLimpiarSin;
+    private javax.swing.JButton btnLimpiarTercetos;
+    private javax.swing.JButton btnTercetos;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jscrollpanel1;
     private javax.swing.JTextArea txtAnalizarLex;
     private javax.swing.JTextArea txtAnalizarSem;
@@ -600,5 +687,6 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JTextArea txtArchivo;
     private javax.swing.JTextArea txtExpresiones;
     private javax.swing.JTextArea txtIdentificadores;
+    private javax.swing.JTextArea txtTercetos;
     // End of variables declaration//GEN-END:variables
 }
